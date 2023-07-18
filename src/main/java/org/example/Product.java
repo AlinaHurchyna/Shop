@@ -1,69 +1,58 @@
 package org.example;
 
-import java.util.Random;
-
 public class Product {
     private int productId;
-    private double price;
+    private static int newId = 1;
+    private Double price;
     private String name;
-    private Category category;
     private int quantity;
 
-    public Product(double price, String name, Category category, int quantity) {
-        this.productId = generateProductId();
-        this.setPrice(price);
-        this.setName(name);
-        this.setCategory(category);
-        this.setQuantity(quantity);
+    public Product(Double price, String name, int quantity) {
+        this.productId = newId++;
+        this.price = price;
+        this.name = name;
+        this.quantity = quantity;
     }
 
-    private int generateProductId() {
 
-        Random random = new Random();
-        return random.nextInt(1000);
+    public boolean validateName(String name) {
+        if (name == null || name.isBlank() || name.length() > 0 && name.length() < 50) {
+            return false;
+        }
+
+        for (char c : name.toCharArray()) {
+            if (!Character.isLetter(c)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public int getProductId() {
         return productId;
     }
 
-    public double getPrice() {
+    public void setProductId(int productId) {
+        this.productId = productId;
+    }
+
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
-        if (price <= 0) {
-            throw new IllegalArgumentException("Price must be greater than 0.");
+    public void setPrice(Double price) {
+        if (price > 0) {
+            this.price = price;
         }
-        this.price = price;
     }
+
 
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Name must not be null or empty.");
-        }
-        if (name.length() < 1 || name.length() > 50) {
-            throw new IllegalArgumentException("Name length must be between 1 and 50 characters.");
-        }
-        if (!name.matches("[a-zA-Z]+")) {
-            throw new IllegalArgumentException("Name must contain only characters.");
-        }
         this.name = name;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        if (category == null) {
-            throw new IllegalArgumentException("Category must not be null.");
-        }
-        this.category = category;
     }
 
     public int getQuantity() {
@@ -71,9 +60,8 @@ public class Product {
     }
 
     public void setQuantity(int quantity) {
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity must be greater than 0.");
+        if (quantity > 0) {
+            this.quantity = quantity;
         }
-        this.quantity = quantity;
     }
 }
