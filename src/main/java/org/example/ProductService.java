@@ -59,7 +59,6 @@ public class ProductService {
             System.out.println("ID: " + product.getProductId());
             System.out.println("Nazwa: " + product.getName());
             System.out.println("Cena: " + product.getPrice());
-            System.out.println("Kategoria: " + product.getCategory().getName());
             System.out.println("Ilość: " + product.getQuantity());
         } else {
             System.out.println("Produkt o podanym ID nie istnieje.");
