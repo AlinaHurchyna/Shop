@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CategoryService {
-    private List<String> categories;
+    private final List<String> categories;
 
     public CategoryService() {
         categories = new ArrayList<>();
