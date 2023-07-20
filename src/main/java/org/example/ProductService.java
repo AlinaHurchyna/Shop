@@ -15,6 +15,7 @@ public class ProductService {
     }
 
     public void removeProduct(int productId) {
+
         Product productToRemove = null;
         for (Product product : products) {
             if (product.getProductId() == productId) {
@@ -43,7 +44,7 @@ public class ProductService {
     public void displayAllProducts() {
         System.out.println("Lista produktów:");
         for (Product product : products) {
-            System.out.println("ID: " 
+            System.out.println("ID: "
                     + product.getProductId()
                     + ", Nazwa: " + product.getName()
                     + ", Cena: " + product.getPrice());
