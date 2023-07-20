@@ -9,12 +9,12 @@ public class Product {
     private int quantity;
 
 
-    public Product(Double price, String name, int quantity) {
+    public Product(Double price, String name, /*Category category,*/ int quantity) {
         this.productId = newProductId++;
-        setPrice(price);
-        setName(name);
-        setCategory(category);
-        setQuantity(quantity);
+        this.setPrice(price);
+        this.setName(name);
+      //  this.setCategory(category);
+        this.setQuantity(quantity);
     }
 
     public int getProductId() {
@@ -39,7 +39,7 @@ public class Product {
         if (name != null
                 && !name.isBlank()
                 && name.length() > 0 && name.length() < 50
-                && name.matches("^[a-zA-Z]*$")) {
+                && name.matches("^[a-zA-Z]+")) {
             this.name = name;
         }
     }
