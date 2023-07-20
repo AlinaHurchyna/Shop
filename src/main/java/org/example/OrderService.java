@@ -13,12 +13,10 @@ public class OrderService {
     }
 
     public void addOrder(Order order) {
-        // Dodaj walidację zamówienia
         orders.add(order);
     }
 
     public void removeOrder(int orderId) {
-        // Znajdź zamówienie po ID i usuń je z listy
         Order orderToRemove = null;
         for (Order order : orders) {
             if (order.getOrderId() == orderId) {
@@ -36,7 +34,6 @@ public class OrderService {
     }
 
     public Order getOrderById(int orderId) {
-        // Znajdź zamówienie po ID
         for (Order order : orders) {
             if (order.getOrderId() == orderId) {
                 return order;
@@ -50,7 +47,8 @@ public class OrderService {
     public void displayAllOrders() {
         System.out.println("Lista zamówień:");
         for (Order order : orders) {
-            System.out.println("ID: " + order.getOrderId() + ", Numer zamówienia: " + order.getOrderNumber());
+            System.out.println("ID: " + order.getOrderId()
+                    + ", Numer zamówienia: " + order.getOrderNumber());
         }
     }
 
