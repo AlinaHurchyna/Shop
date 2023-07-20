@@ -1,6 +1,6 @@
 package org.example;
 public class Category {
-    private int categoryId;
+    private final int categoryId;
     private String name;
 
     public Category(int categoryId, String name) {

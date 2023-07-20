@@ -4,19 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
-    private List<Product> products;
+    private final List<Product> products;
 
     public ProductService() {
         products = new ArrayList<>();
     }
 
-    public void addProduct(Product product) {
-
-        products.add(product);
-    }
-
     public void removeProduct(int productId) {
-        // Znajdź produkt po ID i usuń go z listy
+
         Product productToRemove = null;
         for (Product product : products) {
             if (product.getProductId() == productId) {
