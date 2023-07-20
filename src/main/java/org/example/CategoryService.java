@@ -18,15 +18,15 @@ public class CategoryService {
         categories.remove(category);
     }
 
-    public List<String> getAllMvpCategories() {
-        List<String> mvpCategories = new ArrayList<>();
+    public List<String> getAllCategories() {
+        List<String> Categories = new ArrayList<>();
         for (String category : categories) {
 
         }
-        return mvpCategories;
+        return Categories;
     }
 
-    public String getMvpCategory(String category) {
+    public String getCategory(String category) {
         for (String cat : categories) {
             if (cat.equals(category)) {
                 return cat;

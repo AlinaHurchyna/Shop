@@ -6,6 +6,7 @@ import java.util.Random;
 
 public class Order {
     private int orderId;
+    private static int newOrderId = 1;
     private String orderNumber;
     private double orderSum;
     private String clientName;
@@ -15,7 +16,7 @@ public class Order {
     private Map<Product, Integer> products;
 
     public Order(String clientName, String clientSurname, String clientAddress) {
-        this.orderId = generateOrderId();
+        this.orderId = newOrderId++;
         this.orderNumber = generateOrderNumber();
         this.clientName = validateName(clientName);
         this.clientSurname = validateName(clientSurname);
@@ -24,20 +25,17 @@ public class Order {
         this.products = new HashMap<>();
     }
 
-    private int generateOrderId() {
+  /*  private int generateOrderId() {
 
         Random random = new Random();
-        return random.nextInt(1000); // Przykładowa implementacja - wygenerowanie losowej liczby do celów demonstracyjnych
-    }
+        return random.nextInt(1000);
+    }*/
 
     private String generateOrderNumber() {
-        // Implementacja generowania unikalnego numeru zamówienia
-        // Można wykorzystać różne metody generacji, na przykład UUID, algorytmy hashujące itp.
-        // W tym przypadku wygenerujmy losowy ciąg 8 znaków
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        for (int i = 0; i < 8; i++) {
+        for (int i = 0; i <= 8; i++) {
             int index = random.nextInt(characters.length());
             sb.append(characters.charAt(index));
         }

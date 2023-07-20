@@ -4,19 +4,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ProductService {
-    private List<Product> products;
+    private final List<Product> products;
 
     public ProductService() {
         products = new ArrayList<>();
     }
 
     public void addProduct(Product product) {
-
         products.add(product);
     }
 
     public void removeProduct(int productId) {
-        // Znajdź produkt po ID i usuń go z listy
         Product productToRemove = null;
         for (Product product : products) {
             if (product.getProductId() == productId) {
@@ -34,7 +32,6 @@ public class ProductService {
     }
 
     public Product getProductById(int productId) {
-        // Znajdź produkt po ID
         for (Product product : products) {
             if (product.getProductId() == productId) {
                 return product;
@@ -43,12 +40,13 @@ public class ProductService {
         return null;
     }
 
-    // Inne metody dotyczące zarządzania produktami
-
     public void displayAllProducts() {
         System.out.println("Lista produktów:");
         for (Product product : products) {
-            System.out.println("ID: " + product.getProductId() + ", Nazwa: " + product.getName() + ", Cena: " + product.getPrice());
+            System.out.println("ID: " 
+                    + product.getProductId()
+                    + ", Nazwa: " + product.getName()
+                    + ", Cena: " + product.getPrice());
         }
     }
 
