@@ -47,7 +47,7 @@ public class ProductService {
     public static void printAllProducts() {
         System.out.println("Lista produktów:");
         for (Product product : products) {
-            System.out.println("ID: " 
+            System.out.println("ID: "
                     + product.getProductId()
                     + ", Nazwa: " + product.getName()
                     + ", Cena: " + product.getPrice() + " zł");
