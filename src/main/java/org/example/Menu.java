@@ -12,6 +12,9 @@ public class Menu {
     public void showMainMenu() {
         boolean exit = false;
         while (!exit) {
+
+            System.out.println("Wybierz z listy: ");
+
             System.out.println("1. Zamówienia");
             System.out.println("2. Kategorie produktów");
             System.out.println("3. Produkty");
@@ -37,17 +40,18 @@ public class Menu {
             System.out.println("[1] Lista produktów.");
             System.out.println("[2] Konkretny produkt.");
             System.out.println("[3] Dodaj produkt.");
-            System.out.println("[4] Cofnij");
+            System.out.println("[4] Usuń produkt.");
+            System.out.println("[5] Cofnij");
 
             int choice = scanner.nextInt();
-
             scanner.nextLine();
 
             switch (choice) {
                 case 1 -> ProductService.printAllProducts();
                 case 2 -> ProductService.printSpecificProduct();
-               // case 3 -> ProductService.addProduct();
-                case 4 -> back = true;
+                case 3 -> ProductService.addProduct();
+                case 4 -> ProductService.deleteProduct();
+                case 5 -> back = true;
                 default -> System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");
             }
 
