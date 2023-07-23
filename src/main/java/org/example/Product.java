@@ -13,7 +13,7 @@ public class Product {
         this.productId = newProductId++;
         this.setPrice(price);
         this.setName(name);
-      //  this.setCategory(category);
+       // this.setCategory(category);
         this.setQuantity(quantity);
     }
 

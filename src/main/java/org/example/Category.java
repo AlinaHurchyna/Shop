@@ -10,17 +10,6 @@ public class Category {
         this.name = name;
     }
 
-    public boolean validateName(String name) {
-        if (name == null || name.isBlank() || name.length() > 0 && name.length() < 50) {
-            return false;
-        }
-        for (char c : name.toCharArray()) {
-            if (!Character.isLetter(c)) {
-                return false;
-            }
-        }
-        return true;
-    }
 
     public int getCategoryId() {
         return categoryId;
@@ -31,6 +20,11 @@ public class Category {
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null
+                && !name.isBlank()
+                && name.length() > 0 && name.length() < 50
+                && name.matches("^[a-zA-Z]+")) {
+            this.name = name;
+        }
     }
 }
