@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ProductService {
-    static Scanner scanner =new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
     public static final List<Product> products = generateProducts();
 
     public static List<Product> generateProducts() {
