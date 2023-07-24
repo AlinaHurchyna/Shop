@@ -1,39 +1,24 @@
 package org.example;
 
 public class Product {
-    private int productId;
-    private static int newId = 1;
+    private final int productId;
+    private static int newProductId = 1;
     private Double price;
     private String name;
+    private Category category;
     private int quantity;
 
-    public Product(Double price, String name, int quantity) {
-        this.productId = newId++;
-        this.price = price;
-        this.name = name;
-        this.quantity = quantity;
-    }
 
-
-    public boolean validateName(String name) {
-        if (name == null || name.isBlank() || name.length() > 0 && name.length() < 50) {
-            return false;
-        }
-
-        for (char c : name.toCharArray()) {
-            if (!Character.isLetter(c)) {
-                return false;
-            }
-        }
-        return true;
+    public Product(Double price, String name, /*Category category,*/ int quantity) {
+        this.productId = newProductId++;
+        this.setPrice(price);
+        this.setName(name);
+       // this.setCategory(category);
+        this.setQuantity(quantity);
     }
 
     public int getProductId() {
         return productId;
-    }
-
-    public void setProductId(int productId) {
-        this.productId = productId;
     }
 
     public Double getPrice() {
@@ -46,13 +31,27 @@ public class Product {
         }
     }
 
-
     public String getName() {
         return name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        if (name != null
+                && !name.isBlank()
+                && name.length() > 0 && name.length() < 50
+                && name.matches("^[a-zA-Z]+")) {
+            this.name = name;
+        }
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        if (category != null) {
+            this.category = category;
+        }
     }
 
     public int getQuantity() {

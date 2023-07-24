@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class ProductService {
     static Scanner scanner =new Scanner(System.in);
@@ -25,15 +26,6 @@ public class ProductService {
         return productList;
     }
 
-    /*public static void addProduct(Product product) {
-        products.add(product);
-    }*/
-
-
-    public List<Product> getAllProducts() {
-        return products;
-    }
-
     public static Product getProductById(int productId) {
         for (Product product : products) {
             if (product.getProductId() == productId) {
@@ -43,23 +35,22 @@ public class ProductService {
         return null;
     }
 
-    public void displayAllProducts() {
+    public static void printAllProducts() {
         System.out.println("Lista produktów:");
         for (Product product : products) {
-            System.out.println("ID: "
-                    + product.getProductId()
+            System.out.println("ID: " + product.getProductId()
                     + ", Nazwa: " + product.getName()
-                    + ", Cena: " + product.getPrice());
+                    + ", Cena: " + product.getPrice() + " zł");
         }
     }
 
-    public void displayProductDetails(int productId) {
+    public static void printProductDetails(int productId) {
         Product product = getProductById(productId);
         if (product != null) {
             System.out.println("Szczegóły produktu:");
             System.out.println("ID: " + product.getProductId());
             System.out.println("Nazwa: " + product.getName());
-            System.out.println("Cena: " + product.getPrice());
+            System.out.println("Cena: " + product.getPrice() + " zł");
             System.out.println("Ilość: " + product.getQuantity());
         } else {
             System.out.println("Produkt o podanym ID nie istnieje.");
@@ -80,10 +71,10 @@ public class ProductService {
         }
     }
 
-    private static void printProductDetails(int productId) {
-    }
+    public static void addProduct() {
+        System.out.println("Dodawanie produktu: ");
+        System.out.println();
 
-    /*public static void addProduct() {
         System.out.print("Podaj cenę: ");
         double price = scanner.nextDouble();
         scanner.nextLine();
@@ -91,12 +82,33 @@ public class ProductService {
         System.out.print("Podaj nazwę: ");
         String name = scanner.nextLine();
 
+
         System.out.print("Podaj ilość: ");
         int quantity = scanner.nextInt();
         scanner.nextLine();
 
-        ProductService.addProduct();
+        Product newProduct = new Product(price, name, quantity);
+        products.add(newProduct);
 
         System.out.println("Produkt został dodany.");
-    }*/
+    }
+
+    public static void deleteProduct() {
+        System.out.print("Podaj Id produktu, który chcesz usunąć: ");
+        int productId = scanner.nextInt();
+
+        boolean removed = false;
+        for (int i = 0; i < products.size(); i++) {
+            Product product = products.get(i);
+            if (product.getProductId() == productId) {
+                products.remove(i);
+                removed = true;
+                System.out.println("Produkt został usunięty.");
+                break;
+            }
+        }
+        if (!removed) {
+            System.out.println("Nie znaleziono produktu o podanym ID.");
+        }
+    }
 }
