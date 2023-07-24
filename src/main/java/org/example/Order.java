@@ -20,22 +20,16 @@ public class Order {
         this.orderNumber = generateOrderNumber();
         this.clientName = validateName(clientName);
         this.clientSurname = validateName(clientSurname);
-        this.clientAddress = validateAddress(clientAddress);
+        this.setClientAddress(clientAddress);
         this.orderStatus = OrderStatus.CREATED;
         this.products = new HashMap<>();
     }
-
-  /*  private int generateOrderId() {
-
-        Random random = new Random();
-        return random.nextInt(1000);
-    }*/
 
     private String generateOrderNumber() {
         String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
         StringBuilder sb = new StringBuilder();
         Random random = new Random();
-        for (int i = 0; i <= 8; i++) {
+        for (int i = 1; i <= 8; i++) {
             int index = random.nextInt(characters.length());
             sb.append(characters.charAt(index));
         }
@@ -96,31 +90,21 @@ public class Order {
         return clientAddress;
     }
 
+    public void setClientAddress(String clientAddress) {
+        if (clientAddress == null || clientAddress.isBlank()) {
+            throw new IllegalArgumentException("Address must not be null or empty.");
+        }
+        if (clientAddress.length() < 1 || clientAddress.length() > 50) {
+            throw new IllegalArgumentException("Address length must be between 1 and 50 characters.");
+        }
+        this.clientAddress = clientAddress;
+    }
+
     public OrderStatus getOrderStatus() {
         return orderStatus;
     }
 
     public void setOrderStatus(OrderStatus orderStatus) {
         this.orderStatus = orderStatus;
-    }
-
-    public void addProduct(Product product, int quantity) {
-        if (quantity <= 0) {
-            throw new IllegalArgumentException("Quantity must be greater than 0.");
-        }
-        products.put(product, quantity);
-    }
-
-    public void removeProduct(Product product) {
-        products.remove(product);
-    }
-
-    public void displayOrderProducts() {
-        System.out.println("Order Products:");
-        for (Map.Entry<Product, Integer> entry : products.entrySet()) {
-            Product product = entry.getKey();
-            int quantity = entry.getValue();
-            System.out.println("Product: " + product.getName() + ", Quantity: " + quantity);
-        }
     }
 }
