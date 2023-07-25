@@ -1,4 +1,4 @@
-package org.example;
+package shop.services;
 
 import java.util.Scanner;
 

@@ -1,4 +1,6 @@
-package org.example;
+package shop.model;
+
+import shop.services.OrderStatus;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,12 +17,13 @@ public class Order {
     private OrderStatus orderStatus;
     private Map<Product, Integer> products;
 
-    public Order(String clientName, String clientSurname, String clientAddress) {
+    public Order(String clientName, String clientSurname, String clientAddress, double orderSum) {
         this.orderId = newOrderId++;
         this.orderNumber = generateOrderNumber();
         this.clientName = validateName(clientName);
         this.clientSurname = validateName(clientSurname);
         this.setClientAddress(clientAddress);
+        this.setOrderSum(orderSum);
         this.orderStatus = OrderStatus.CREATED;
         this.products = new HashMap<>();
     }
@@ -47,16 +50,6 @@ public class Order {
             throw new IllegalArgumentException("Name must contain only characters.");
         }
         return name;
-    }
-
-    private String validateAddress(String address) {
-        if (address == null || address.isBlank()) {
-            throw new IllegalArgumentException("Address must not be null or empty.");
-        }
-        if (address.length() < 1 || address.length() > 50) {
-            throw new IllegalArgumentException("Address length must be between 1 and 50 characters.");
-        }
-        return address;
     }
 
     public int getOrderId() {

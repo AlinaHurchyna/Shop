@@ -1,4 +1,4 @@
-package org.example;
+package shop.model;
 
 public class Category {
     private final int categoryId;
@@ -7,7 +7,7 @@ public class Category {
 
     public Category(String name) {
         this.categoryId = newCategoryId++;
-        this.name = name;
+        this.setName(name);
     }
 
     public int getCategoryId() {

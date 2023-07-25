@@ -1,4 +1,4 @@
-package org.example;
+package shop.services;
 
 public enum OrderStatus {
     CREATED,

@@ -1,11 +1,10 @@
-package org.example;
+package shop.services;
+
+import shop.model.Category;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-
-import static org.example.ProductService.getProductById;
-import static org.example.ProductService.products;
 
 public class CategoryService {
 

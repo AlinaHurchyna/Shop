@@ -1,4 +1,6 @@
-package org.example;
+package shop.services;
+
+import shop.model.Order;
 
 import java.util.*;
 
@@ -10,11 +12,11 @@ public class OrderService {
     public static List<Order> generateOrders() {
         List<Order> orderList = new ArrayList<>();
 
-        Order order1 = new Order("Jan", "Kowalski", "Nowa 1");
-        Order order2 = new Order("Anna", "Nowak", "Wyzwolenia 12");
-        Order order3 = new Order("Piotr", "Wilewski", "Ratuszowy 8");
-        Order order4 = new Order("Alicja", "Wilk", "Kamienna 3");
-        Order order5 = new Order("Krzysztof", "Adamczyk", "Ogrodowa 9");
+        Order order1 = new Order("Jan", "Kowalski", "Nowa 1", 1222.9);
+        Order order2 = new Order("Anna", "Nowak", "Wyzwolenia 12", 999.9);
+        Order order3 = new Order("Piotr", "Wilewski", "Ratuszowy 8", 838);
+        Order order4 = new Order("Alicja", "Wilk", "Kamienna 3", 342);
+        Order order5 = new Order("Krzysztof", "Adamczyk", "Ogrodowa 9", 4543);
 
         orderList.add(order1);
         orderList.add(order2);
@@ -56,6 +58,7 @@ public class OrderService {
             System.out.println("Imię klienta: " + order.getClientName());
             System.out.println("Nazwisko klienta: " + order.getClientSurname());
             System.out.println("Adres klienta: " + order.getClientAddress());
+            System.out.println("Suma zamówienia: " + order.getOrderSum());
             System.out.println("Status zamówienia: " + order.getOrderStatus());
         } else {
             System.out.println("Zamówienie o podanym ID nie istnieje.");
@@ -91,7 +94,11 @@ public class OrderService {
         System.out.print("Podaj adres: ");
         String address = scanner.nextLine();
 
-        Order newOrder = new Order(name, surname, address);
+        System.out.print("Podaj sumę zamówienia: ");
+        Double sum = scanner.nextDouble();
+
+
+        Order newOrder = new Order(name, surname, address, sum);
         orders.add(newOrder);
 
         System.out.println("Zamówienie zostało dodane.");

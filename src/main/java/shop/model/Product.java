@@ -1,4 +1,4 @@
-package org.example;
+package shop.model;
 
 public class Product {
     private final int productId;
