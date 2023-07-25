@@ -1,29 +1,13 @@
 package shop.model;
 
-public class Category {
-    private final int categoryId;
-    private static int newCategoryId = 1;
-    private String name;
-
-    public Category(String name) {
-        this.categoryId = newCategoryId++;
-        this.setName(name);
+public record Category(int id, String name) {
+    public Category {
+        validateName();
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        if (name != null
-                && !name.isBlank()
-                && name.length() > 0 && name.length() < 50
-                && name.matches("^[a-zA-Z]+")) {
-            this.name = name;
+    private void validateName() {
+        if (name == null || !name.matches("^[a-zA-Z]{1,50}")) {
+            throw new IllegalArgumentException();
         }
     }
 }
