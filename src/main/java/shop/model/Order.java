@@ -96,6 +96,6 @@ public class Order {
 	}
 
 	public void setOrderStatus(String orderStatus) {
-		this.orderStatus = orderStatus;
+		this.orderStatus = OrderStatus.valueOf(orderStatus);
 	}
 }
