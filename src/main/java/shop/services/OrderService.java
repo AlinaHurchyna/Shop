@@ -1,5 +1,6 @@
 package shop.services;
 
+
 import shop.model.Order;
 import shop.model.OrderStatus;
 
@@ -8,13 +9,16 @@ import java.util.List;
 import java.util.Scanner;
 
 public class OrderService {
+	private static List<Order> orders;
+	private static Scanner scanner;
 
-	static Scanner scanner = new Scanner(System.in);
-	public static final List<Order> orders = generateOrders();
+	public OrderService() {
+		orders = generateOrders();
+		scanner = new Scanner(System.in);
+	}
 
-	public static List<Order> generateOrders() {
+	public List<Order> generateOrders() {
 		List<Order> orderList = new ArrayList<>();
-
 		Order order1 = new Order("Jan", "Kowalski", "Nowa 1", 1222.9);
 		Order order2 = new Order("Anna", "Nowak", "Wyzwolenia 12", 999.9);
 		Order order3 = new Order("Piotr", "Wilewski", "Ratuszowy 8", 838);
@@ -47,11 +51,10 @@ public class OrderService {
 		}
 	}
 
-	public static void displayOrderDetails() {
+	public static void printOrderDetails() {
 		System.out.println("Podaj Id zamówienia: ");
-
 		int orderId = scanner.nextInt();
-
+		scanner.nextLine(); // Consume the newline character left by nextInt()
 		Order order = getOrderById(orderId);
 		if (order != null) {
 			System.out.println("Szczegóły zamówienia:");
@@ -61,18 +64,16 @@ public class OrderService {
 			System.out.println("Imię klienta: " + order.getClientName());
 			System.out.println("Nazwisko klienta: " + order.getClientSurname());
 			System.out.println("Adres klienta: " + order.getClientAddress());
-			System.out.println("Suma zamówienia: " + order.getOrderSum());
 			System.out.println("Status zamówienia: " + order.getOrderStatus());
 		} else {
 			System.out.println("Zamówienie o podanym ID nie istnieje.");
 		}
 	}
 
-	public static void displayOrderStatus() {
+	public static void printOrderStatus() {
 		System.out.print("Podaj Id zamówienia: ");
-
 		int orderId = scanner.nextInt();
-
+		scanner.nextLine(); // Consume the newline character left by nextInt()
 		Order order = getOrderById(orderId);
 		if (order != null) {
 			System.out.println("Status zamówienia:");
@@ -87,55 +88,49 @@ public class OrderService {
 	public static void addOrder() {
 		System.out.println("Dodawanie zamówienia: ");
 		System.out.println();
-
 		System.out.print("Podaj imię: ");
-		String name = scanner.nextLine();
-
+		String firstName = scanner.nextLine();
 		System.out.print("Podaj nazwisko: ");
-		String surname = scanner.nextLine();
-
+		String lastName = scanner.nextLine();
 		System.out.print("Podaj adres: ");
 		String address = scanner.nextLine();
-
 		System.out.print("Podaj sumę zamówienia: ");
-		Double sum = scanner.nextDouble();
+		double orderSum = scanner.nextDouble();
+		scanner.nextLine(); // Consume the newline character left by nextDouble()
 
-
-		Order newOrder = new Order(name, surname, address, sum);
+		Order newOrder = new Order(firstName, lastName, address, orderSum);
 		orders.add(newOrder);
-
 		System.out.println("Zamówienie zostało dodane.");
 	}
 
-	public static void deleteOrder() {
+	public void deleteOrder() {
 		System.out.print("Podaj Id zamówienia, które chcesz usunąć: ");
 		int orderId = scanner.nextInt();
-
-		boolean removed = false;
+		boolean deleted = false;
 		for (int i = 0; i < orders.size(); i++) {
 			Order order = orders.get(i);
 			if (order.getOrderId() == orderId) {
 				orders.remove(i);
-				removed = true;
+				deleted = true;
 				System.out.println("Zamówienie zostało usunięte.");
 				break;
 			}
 		}
-		if (!removed) {
+		if (!deleted) {
 			System.out.println("Nie znaleziono zamówienia o podanym ID.");
 		}
 	}
 
 	public static void changeOrderStatus() {
-		System.out.print("Wprowadź nowy status: ");
+		System.out.print("Podaj ID zamówienia, dla którego chcesz zmienić status: ");
 		int orderId = scanner.nextInt();
-		String newStatus = scanner.nextLine();
-
+		scanner.nextLine(); // Consume the newline character left by nextInt()
 		Order order = getOrderById(orderId);
 		if (order != null) {
+			System.out.print("Wprowadź nowy status: ");
+			String newStatus = scanner.nextLine();
 			order.setOrderStatus(OrderStatus.valueOf(newStatus));
-			System.out.println("Zmieniono status zamówienia o ID "
-					+ orderId + " na " + newStatus);
+			System.out.println("Zmieniono status zamówienia o ID " + orderId + " na " + newStatus);
 		} else {
 			System.out.println("Zamówienie o podanym ID nie istnieje.");
 		}
