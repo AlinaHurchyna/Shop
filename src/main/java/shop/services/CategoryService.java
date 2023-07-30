@@ -34,4 +34,7 @@ public class CategoryService {
 
 	public void addOrder() {
 	}
+
+	public void createCategory() {
+	}
 }

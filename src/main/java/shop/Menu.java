@@ -2,13 +2,10 @@ package shop;
 
 import shop.model.Category;
 import shop.model.Order;
-import shop.model.OrderStatus;
 import shop.services.CategoryService;
 import shop.services.ProductService;
 
 import java.util.Scanner;
-
-import static shop.services.OrderService.orders;
 
 public class Menu {
 	private static final Scanner scanner = new Scanner(System.in);
@@ -135,14 +132,13 @@ public class Menu {
 		scanner.nextLine();
 
 		Category category = categoryService.getCategoryById(categoryId);
-		if (category != null) {
-			printCategoryDetails(categoryId);
-		} else {
+		if (category != null) printAllCategory();
+		else {
 			System.out.println("Kategoria o podanym ID nie istnieje.");
 		}
 	}
 
-	public void addCategory() {
+	public Category addCategory() {
 		System.out.println("Dodawanie kategorii: ");
 		System.out.println();
 
@@ -152,6 +148,7 @@ public class Menu {
 		categoryService.createCategory(name);
 
 		System.out.println("Kategoria została dodana.");
+		return null;
 	}
 
 	public void deleteCategory() {
@@ -167,8 +164,7 @@ public class Menu {
 	}
 
 
-	private void printCategoryDetails(int categoryId) {
-	}
+
 }
 
 
