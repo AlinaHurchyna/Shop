@@ -5,7 +5,7 @@ public enum OrderStatus {
 	PAID,
 	CANCELLED,
 	SHIPPED,
-	PROCESSING
+	PROCESSING;
 	@Override
 	public String toString() {
 		switch (this) {
