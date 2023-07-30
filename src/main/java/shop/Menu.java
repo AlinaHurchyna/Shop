@@ -1,16 +1,21 @@
 package shop;
 
 import shop.model.Category;
+import shop.model.Order;
+import shop.model.OrderStatus;
 import shop.services.CategoryService;
 import shop.services.ProductService;
 
 import java.util.Scanner;
 
+import static shop.services.OrderService.orders;
+
 public class Menu {
 	private static final Scanner scanner = new Scanner(System.in);
 	private final CategoryService categoryService = new CategoryService();
+	private int categoryId;
 
-	public void showMainMenu() {
+	public void showMainMenu(int orderId) {
 		boolean exit = false;
 		while (!exit) {
 
@@ -25,9 +30,9 @@ public class Menu {
 			scanner.nextLine();
 
 			switch (choice) {
-				case 1 -> showOrderSubMenu();
+				case 1 -> showOrderSubMenu(orderId);
 				case 2 -> showCategorySubMenu();
-				case 3 -> showProductSubMenu();
+				case 3 -> showOrderSubMenu(orderId);
 				case 4 -> exit = true;
 				default -> System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");
 			}
@@ -35,7 +40,8 @@ public class Menu {
 		}
 	}
 
-	public void showOrderSubMenu() {
+
+	public Order showOrderSubMenu(int orderId) {
 		boolean back = false;
 		while (!back) {
 			System.out.println("[1] Lista zamówień.");
@@ -59,14 +65,19 @@ public class Menu {
 				case 3 -> categoryService.addOrder();
 				case 4 -> deleteCategory();
 				//case 5 ->
-				case 6 -> categoryService.changeOrderStatus();
-				case 7 -> categoryService.changeOrderStatus();
+				case 6 -> categoryService.hashCode();
+				case 7 -> categoryService.hashCode();
 				//case 8 ->
 				case 9 -> back = true;
 				default -> System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");
 			}
 			System.out.println();
 		}
+		return null;
+	}
+
+	private void printAllCategory() {
+
 	}
 
 	public void showCategorySubMenu() {
@@ -117,26 +128,6 @@ public class Menu {
 		}
 	}
 
-	public void printAllCategory() {
-		System.out.println("Lista kategorii:");
-		for (Category category : categoryService.getCategories()) {
-			System.out.println("ID: " + category.id()
-					+ ", Nazwa: " + category.name());
-		}
-	}
-
-	public void printCategoryDetails(int categoryId) {
-		Category category = categoryService.getCategoryById(categoryId);
-		if (category != null) {
-			System.out.println("Szczegóły produktu:");
-			System.out.println("ID: " + category.id());
-			System.out.println("Nazwa: " + category.name());
-
-		} else {
-			System.out.println("Produkt o podanym ID nie istnieje.");
-		}
-	}
-
 	public void printSpecificCategory() {
 		System.out.print("Podaj ID kategorii: ");
 
@@ -165,7 +156,7 @@ public class Menu {
 
 	public void deleteCategory() {
 		System.out.print("Podaj Id kategorii, którą chcesz usunąć: ");
-		int categoryId = scanner.nextInt();
+		categoryId = scanner.nextInt();
 
 		if (categoryService.removeCategory(categoryId)) {
 			System.out.println("Usunięto.");
@@ -174,4 +165,10 @@ public class Menu {
 
 		}
 	}
+
+
+	private void printCategoryDetails(int categoryId) {
+	}
 }
+
+
