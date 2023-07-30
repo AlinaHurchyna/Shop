@@ -2,15 +2,12 @@ package shop;
 
 import shop.model.Category;
 import shop.services.CategoryService;
-import shop.services.OrderService;
 import shop.services.ProductService;
 
 import java.util.Scanner;
 
-import static shop.services.OrderService.printAllOrders;
-
 public class Menu {
-	private final Scanner scanner = new Scanner(System.in);
+	private static final Scanner scanner = new Scanner(System.in);
 	private final CategoryService categoryService = new CategoryService();
 
 	public void showMainMenu() {
@@ -55,15 +52,15 @@ public class Menu {
 			scanner.nextLine();
 
 			switch (choice) {
-				case 1 -> printAllOrders();
+				case 1 -> printAllCategory();
 				case 2 -> {
-					OrderService.printOrderDetails();
+					printAllCategory();
 				}
-				case 3 -> OrderService.addOrder();
+				case 3 -> categoryService.addOrder();
 				case 4 -> deleteCategory();
 				//case 5 ->
-				case 6 -> OrderService.changeOrderStatus();
-				case 7 -> OrderService.printOrderStatus();
+				case 6 -> categoryService.changeOrderStatus();
+				case 7 -> categoryService.changeOrderStatus();
 				//case 8 ->
 				case 9 -> back = true;
 				default -> System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");

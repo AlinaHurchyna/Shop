@@ -30,4 +30,11 @@ public class CategoryService {
 	public List<Category> getCategories() {
 		return categories;
 	}
+
+
+	public void addOrder() {
+	}
+
+	public void changeOrderStatus() {
+	}
 }
