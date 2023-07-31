@@ -1,5 +1,4 @@
 package shop.services;
-
 import shop.model.Order;
 import shop.model.OrderStatus;
 
@@ -23,7 +22,7 @@ public class OrderService {
 		return orders;
 	}
 
-	public Order getOrderById(int orderId) {
+	private Order getOrderById(int orderId) {
 		for (Order order : orders) {
 			if (order.getOrderId() == orderId) {
 				return order;
@@ -61,16 +60,12 @@ public class OrderService {
 		return order != null ? order.getOrderStatus() : null;
 	}
 
-	public void getOrderById() {
-		for (Order order : orders) {
-			int orderId;
-			orderId = 0;
-			if (order.getOrderId() == orderId) {
-				break;
-			}
-		}
+	public void changeOrderStatus(int orderId, OrderStatus newStatus) {
+		Order order = getOrderById(orderId);
+		if (order != null) order.setOrderStatus(newStatus);
 	}
 }
+
 
 
 

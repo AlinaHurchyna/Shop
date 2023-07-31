@@ -95,7 +95,7 @@ public class Order {
 		return orderStatus;
 	}
 
-	public void setOrderStatus(String orderStatus) {
+	public void setOrderStatus(OrderStatus orderStatus) {
 		this.orderStatus = OrderStatus.valueOf(orderStatus);
 	}
 }
