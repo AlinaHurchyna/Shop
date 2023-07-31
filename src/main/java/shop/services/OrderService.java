@@ -5,21 +5,11 @@ import shop.model.OrderStatus;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 
-public final class OrderService {
-	final Scanner scanner = new Scanner(System.in);
-	private List<Order> orders;
-	public final List<Order> categories;
-	private String status;
-
-	public OrderService(List<Order> orders, List<Order> categories) {
-		this.orders = orders;
-		this.categories = categories;
-	}
+public class OrderService {
+	private final List<Order> orders = new ArrayList<>();
 
 	public List<Order> generateOrders() {
-		List<Order> orderList = new ArrayList<>();
 		Order order1 = new Order("Jan", "Kowalski", "Nowa 1", 1222.9);
 		Order order2 = new Order("Anna", "Nowak", "Wyzwolenia 12", 999.9);
 		Order order3 = new Order("Piotr", "Wilewski", "Ratuszowy 8", 838);
@@ -30,39 +20,45 @@ public final class OrderService {
 		orders.add(order3);
 		orders.add(order4);
 		orders.add(order5);
-		return orderList;
+		return orders;
 	}
 
-	public void isValidOrderStatus(String status) {
-		this.status = status;
+	public Order getOrderById(int orderId) {
+		for (Order order : orders) {
+			if (order.getOrderId() == orderId) {
+				return order;
+			}
+		}
+		return null;
+	}
+
+	private boolean isValidOrderStatus(String status) {
 		for (OrderStatus validStatus : OrderStatus.values()) {
 			if (validStatus.name().equalsIgnoreCase(status)) {
-				return;
+				return true;
 			}
+		}
+		return false;
+	}
+
+	public void addOrder(Order order) {
+		orders.add(order);
+	}
+
+	public void deleteOrder(int orderId) {
+		Order orderToDelete = getOrderById(orderId);
+		if (orderToDelete != null) {
+			orders.remove(orderToDelete);
 		}
 	}
 
-	public void printSpecificCategory() { System.out.println("Podaj nazwę kategorii, którą chcesz wyświetlić: ");
-		String categoryName = scanner.nextLine();
-
-
-		System.out.println("Zamówienia w kategorii \"" + categoryName + "\":");
-		for (Order order : orders) {
-			if (order.getOrderNumber().equalsIgnoreCase(categoryName)) {
-				System.out.println("ID: " + order.getOrderId() + ", Numer zamówienia: " + order.getOrderNumber());
-
-			}
-		}
-
+	public List<Order> getAllOrders() {
+		return orders;
 	}
 
-	public void printAllCategory() {
-		System.out.println("Lista wszystkich kategorii:");
-
-		for (Order category : categories) {
-			System.out.println(category.getClass());
-		}
-
+	public OrderStatus getOrderStatus(int orderId) {
+		Order order = getOrderById(orderId);
+		return order != null ? order.getOrderStatus() : null;
 	}
 
 	public void getOrderById() {
