@@ -1,4 +1,5 @@
 package shop.services;
+
 import shop.model.Order;
 import shop.model.OrderStatus;
 
@@ -7,6 +8,7 @@ import java.util.List;
 
 public class OrderService {
 	private final List<Order> orders = new ArrayList<>();
+	private int getOrderById = 0;
 
 	public List<Order> generateOrders() {
 		Order order1 = new Order("Jan", "Kowalski", "Nowa 1", 1222.9);
@@ -63,6 +65,14 @@ public class OrderService {
 	public void changeOrderStatus(int orderId, OrderStatus newStatus) {
 		Order order = getOrderById(orderId);
 		if (order != null) order.setOrderStatus(newStatus);
+	}
+
+	public int getGetOrderById() {
+		return getOrderById;
+	}
+
+	public void setGetOrderById(int getOrderById) {
+		this.getOrderById = getOrderById;
 	}
 }
 
