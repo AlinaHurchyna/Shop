@@ -6,5 +6,12 @@ public enum OrderStatus {
 	CANCELLED,
 	SHIPPED,
 	PROCESSING;
-
+	private boolean isValidOrderStatus(String status) {
+		for (OrderStatus validStatus : OrderStatus.values()) {
+			if (validStatus.name().equalsIgnoreCase(status)) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

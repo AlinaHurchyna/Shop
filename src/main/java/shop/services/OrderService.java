@@ -2,15 +2,15 @@ package shop.services;
 
 import shop.model.Order;
 import shop.model.OrderStatus;
-
+import java.util.Optional;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class OrderService {
 	private final List<Order> orders = new ArrayList<>();
-	private int OrderById = 0;
 
-	public List<Order> generateOrders() {
+	private  List<Order> generateOrders() {
 		Order order1 = new Order("Jan", "Kowalski", "Nowa 1", 1222.9);
 		Order order2 = new Order("Anna", "Nowak", "Wyzwolenia 12", 999.9);
 		Order order3 = new Order("Piotr", "Wilewski", "Ratuszowy 8", 838);
@@ -24,25 +24,21 @@ public class OrderService {
 		return orders;
 	}
 
+
+
+
 	private Order getOrderById(int orderId) {
-		for (Order order : orders) {
-			if (order.getOrderId() == orderId) {
-				return order;
-			}
-		}
-		return null;
+		Optional<Order> orderOptional = orders.stream()
+				.filter(order -> order.getOrderId() == orderId)
+				.findFirst();
+
+		return orderOptional.orElse(null);
 	}
 
-	private boolean isValidOrderStatus(String status) {
-		for (OrderStatus validStatus : OrderStatus.values()) {
-			if (validStatus.name().equalsIgnoreCase(status)) {
-				return true;
-			}
-		}
-		return false;
-	}
 
-	public void addOrder(Order order) {
+
+
+	private void addOrder(Order order) {
 		orders.add(order);
 	}
 
@@ -67,12 +63,7 @@ public class OrderService {
 		if (order != null) order.setOrderStatus(newStatus);
 	}
 
-	public int getOrderById() {
-		return OrderById;
-	}
-
 	public void setOrderById(int orderById) {
-		this.OrderById = orderById;
 	}
 }
 
