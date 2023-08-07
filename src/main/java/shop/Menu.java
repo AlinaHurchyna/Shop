@@ -2,6 +2,7 @@ package shop;
 
 import shop.model.Category;
 import shop.model.Order;
+import shop.model.Product;
 import shop.services.CategoryService;
 import shop.services.ProductService;
 
@@ -10,7 +11,8 @@ import java.util.Scanner;
 public class Menu {
 	private static final Scanner scanner = new Scanner(System.in);
 	private final CategoryService categoryService = new CategoryService();
-	private int categoryId;
+	private final ProductService productService = new ProductService();
+
 
 	public void showMainMenu(int orderId) {
 		boolean exit = false;
@@ -29,7 +31,7 @@ public class Menu {
 			switch (choice) {
 				case 1 -> showOrderSubMenu(orderId);
 				case 2 -> showCategorySubMenu();
-				case 3 -> showOrderSubMenu(orderId);
+				case 3 -> showProductSubMenu();
 				case 4 -> exit = true;
 				default -> System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");
 			}
@@ -73,9 +75,6 @@ public class Menu {
 		return null;
 	}
 
-	private void printAllCategory() {
-
-	}
 
 	public void showCategorySubMenu() {
 		boolean back = false;
@@ -114,14 +113,23 @@ public class Menu {
 			scanner.nextLine();
 
 			switch (choice) {
-				case 1 -> ProductService.printAllProducts();
-				case 2 -> ProductService.printSpecificProduct();
-				case 3 -> ProductService.addProduct();
-				case 4 -> ProductService.deleteProduct();
+				case 1 -> printAllProducts();
+				case 2 -> printSpecificProduct();
+				//case 3 -> addProduct();
+				case 4 -> deleteProduct();
 				case 5 -> back = true;
 				default -> System.out.println("Nieprawidłowy wybór. Spróbuj ponownie.");
 			}
 			System.out.println();
+		}
+	}
+
+
+	public void printAllCategory() {
+		System.out.println("Lista kategorii:");
+		for (Category category : categoryService.getCategories()) {
+			System.out.println("ID: " + category.id()
+					+ ", Nazwa: " + categoryService.getCategories());
 		}
 	}
 
@@ -138,7 +146,7 @@ public class Menu {
 		}
 	}
 
-	public Category addCategory() {
+	public void addCategory() {
 		System.out.println("Dodawanie kategorii: ");
 		System.out.println();
 
@@ -148,23 +156,89 @@ public class Menu {
 		categoryService.createCategory(name);
 
 		System.out.println("Kategoria została dodana.");
-		return null;
 	}
+
 
 	public void deleteCategory() {
 		System.out.print("Podaj Id kategorii, którą chcesz usunąć: ");
-		categoryId = scanner.nextInt();
+		int id = scanner.nextInt();
 
-		if (categoryService.removeCategory(categoryId)) {
+		if (categoryService.removeCategory(id)) {
 			System.out.println("Usunięto.");
 		} else {
 			System.out.println("Nie znaleziono kategorii o podanym ID.");
+		}
+	}
 
+	public void printAllProducts() {
+		System.out.println("Lista produktów:");
+		for (Product product : productService.getProducts()) {
+			System.out.println("ID: " + product.getProductId()
+					+ ", Nazwa: " + product.getName()
+					+ ", Kategoria: " + product.getCategory()
+					+ ", Cena: " + product.getPrice() + " zł");
+		}
+	}
+
+	public void printProductDetails(int productId) {
+		Product product = productService.getProductById(productId);
+		if (product != null) {
+			System.out.println("Szczegóły produktu:");
+			System.out.println("ID: " + product.getProductId());
+			System.out.println("Nazwa: " + product.getName());
+			System.out.println("Cena: " + product.getPrice() + " zł");
+			System.out.println("Ilość: " + product.getQuantity());
+		} else {
+			System.out.println("Produkt o podanym ID nie istnieje.");
+		}
+	}
+
+	public void printSpecificProduct() {
+		System.out.print("Podaj ID produktu: ");
+
+		int productId = scanner.nextInt();
+		scanner.nextLine();
+
+		Product product = productService.getProductById(productId);
+		if (product != null) {
+			printProductDetails(productId);
+		} else {
+			System.out.println("Produkt o podanym ID nie istnieje.");
+		}
+	}
+
+/*	public void addProduct() {
+		System.out.println("Dodawanie produktu: ");
+		System.out.println();
+
+		System.out.print("Podaj cenę: ");
+		double price = scanner.nextDouble();
+		scanner.nextLine();
+
+		System.out.print("Podaj nazwę: ");
+		String name = scanner.nextLine();
+
+		System.out.print("Podaj ilość: ");
+		int quantity = scanner.nextInt();
+		scanner.nextLine();
+
+		Product newProduct = new Product(price, name, quantity);
+		productService.createProduct( );
+
+		System.out.println("Produkt został dodany.");
+	}*/
+
+
+	public void deleteProduct() {
+		System.out.print("Podaj Id produktu, który chcesz usunąć: ");
+		int productId = scanner.nextInt();
+
+		if (productService.removeProduct(productId)) {
+			System.out.println("Produkt został usunięty.");
+		} else {
+			System.out.println("Nie znaleziono produktu o podanym ID.");
 		}
 	}
 
 
-
 }
-
-

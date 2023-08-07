@@ -12,7 +12,7 @@ public class Order {
 	private final String clientName;
 	private final String clientSurname;
 	private String clientAddress;
-	private OrderStatus orderStatus;
+	private final OrderStatus orderStatus;
 	private final Map<Product, Integer> products;
 
 	public Order(String clientName, String clientSurname, String clientAddress, double orderSum) {
